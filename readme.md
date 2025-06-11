@@ -1,6 +1,6 @@
 # 🏪 Hệ thống Quản lý Khách hàng Siêu thị Vinmart
 
-> Đề tài bài tập lớn học phần Lập trình Python – Nhóm sinh viên Khoa CNTT  
+> Đề tài bài tập lớn học phần Lập trình Python – Nhóm sinh viên lớp 242_INFO4511_02 
 > 🚀 Giao diện: Web app với **Streamlit**  
 > 📁 Lưu trữ dữ liệu: **File JSON**  
 > 💻 Ngôn ngữ: Python (Không dùng class – phù hợp với sinh viên năm 2)
@@ -36,7 +36,7 @@ customer_manager/
 
 ## 🚀 LINK CHƯƠNG TRÌNH ĐÃ DEPLOY TRÊN WEB
 
-(LINK BÀI TẬP NHÓM 7)[https://python-tmu-group7.streamlit.app]
+[LINK BÀI TẬP NHÓM 7](https://python-tmu-group7.streamlit.app)
 
 ---
 
@@ -63,7 +63,6 @@ customer_manager/
 | Tính năng        | Miêu tả                                                             |
 |------------------|---------------------------------------------------------------------|
 | Modular hóa      | Code chia module rõ ràng, dễ bảo trì và mở rộng                   |
-| Không dùng class | Đơn giản hoá cho sinh viên mới học Python                         |
 | Lưu trữ an toàn  | Ghi/đọc file JSON tránh mất dữ liệu khi tắt chương trình          |
 | Web UI tiện lợi  | Giao diện Streamlit dễ thao tác, có thể triển khai lên internet   |
 
@@ -90,7 +89,7 @@ customer_manager/
 ## 👩‍💻 Nhóm thực hiện
 
 - **Bùi Trịnh Minh Ngọc** – Trưởng nhóm  
-- [Thêm tên các thành viên khác tại đây nếu có]
+- 
 
 ---
 
