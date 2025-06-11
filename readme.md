@@ -34,21 +34,9 @@ customer_manager/
 
 ---
 
-## 🚀 Hướng dẫn chạy chương trình
+## 🚀 LINK CHƯƠNG TRÌNH ĐÃ DEPLOY TRÊN WEB
 
-### ✅ Bước 1: Cài thư viện Streamlit
-
-```bash
-pip install streamlit
-```
-
-### ✅ Bước 2: Chạy chương trình
-
-```bash
-streamlit run app.py
-```
-
-Chương trình sẽ mở giao diện web trên trình duyệt mặc định.
+(LINK BÀI TẬP NHÓM 7)[https://python-tmu-group7.streamlit.app]
 
 ---
 
