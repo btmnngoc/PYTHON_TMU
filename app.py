@@ -41,24 +41,8 @@ elif menu == "Xoá khách hàng":
 
 # Cập nhật
 elif menu == "Cập nhật":
-    st.subheader("✏️ Cập nhật thông tin")
-    customers = list_customers(FILE_PATH)
-    ids = [c["id"] for c in customers]
-    id_to_update = st.selectbox("Chọn mã KH cần cập nhật", ids)
-    selected = next((c for c in customers if c["id"] == id_to_update), None)
-    if selected:
-        name = st.text_input("Tên KH", selected["name"])
-        phone = st.text_input("SĐT", selected["phone"])
-        email = st.text_input("Email", selected["email"])
-        address = st.text_input("Địa chỉ", selected["address"])
-        if st.button("Cập nhật"):
-            update_customer(FILE_PATH, id_to_update, {
-                "name": name,
-                "phone": phone,
-                "email": email,
-                "address": address
-            })
-            st.success("✅ Cập nhật thành công!")
+    from modules.update_customer import update_customer_ui
+    update_customer_ui(FILE_PATH)
 
 # Tìm kiếm
 elif menu == "Tìm kiếm":
