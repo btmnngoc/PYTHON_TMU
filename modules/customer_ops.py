@@ -1,10 +1,25 @@
 from modules.file_io import read_customers, write_customers
+from datetime import datetime
 
-def add_customer(file_path, customer):
+def update_customer(file_path, customer_id, new_data):
     data = read_customers(file_path)
-    data.append(customer)
-    write_customers(file_path, data)
+    updated = False
 
+    for customer in data:
+        if customer["id"] == customer_id:
+            for key, value in new_data.items():
+                if value != "" and key in customer:
+                    customer[key] = value
+            customer["last_updated"] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            updated = True
+            break
+
+    if updated:
+        write_customers(file_path, data)
+        print(f"✅ Đã cập nhật khách hàng ID {customer_id}")
+    else:
+        print(f"⚠️ Không tìm thấy khách hàng ID {customer_id}")
+        
 def delete_customer(file_path, customer_id):
     data = read_customers(file_path)
     data = [c for c in data if c["id"] != customer_id]
