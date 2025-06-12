@@ -1,6 +1,7 @@
 import streamlit as st
 from modules.customer_ops import *
 import os
+from datetime import datetime
 
 FILE_PATH = "data/customers.json"
 os.makedirs("data", exist_ok=True)
@@ -43,22 +44,26 @@ elif menu == "Xoá khách hàng":
 elif menu == "Cập nhật":
     st.subheader("✏️ Cập nhật thông tin")
     customers = list_customers(FILE_PATH)
-    ids = [c["id"] for c in customers]
-    id_to_update = st.selectbox("Chọn mã KH cần cập nhật", ids)
-    selected = next((c for c in customers if c["id"] == id_to_update), None)
-    if selected:
-        name = st.text_input("Tên KH", selected["name"])
-        phone = st.text_input("SĐT", selected["phone"])
-        email = st.text_input("Email", selected["email"])
-        address = st.text_input("Địa chỉ", selected["address"])
-        if st.button("Cập nhật"):
-            update_customer(FILE_PATH, id_to_update, {
-                "name": name,
-                "phone": phone,
-                "email": email,
-                "address": address
-            })
-            st.success("✅ Cập nhật thành công!")
+    if not customers:
+        st.warning("📭 Hiện chưa có khách hàng để cập nhật.")
+    else:
+        ids = [c["id"] for c in customers]
+        id_to_update = st.selectbox("Chọn mã KH cần cập nhật", ids)
+        selected = next((c for c in customers if c["id"] == id_to_update), None)
+        if selected:
+            name = st.text_input("Tên KH", selected.get("name", ""))
+            phone = st.text_input("SĐT", selected.get("phone", ""))
+            email = st.text_input("Email", selected.get("email", ""))
+            address = st.text_input("Địa chỉ", selected.get("address", ""))
+            
+            if st.button("Cập nhật"):
+                update_customer(FILE_PATH, id_to_update, {
+                    "name": name,
+                    "phone": phone,
+                    "email": email,
+                    "address": address
+                })
+                st.success(f"✅ Cập nhật thành công KH {id_to_update} lúc {datetime.now().strftime('%H:%M:%S %d-%m-%Y')}")
 
 # Tìm kiếm
 elif menu == "Tìm kiếm":
