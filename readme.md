@@ -3,7 +3,7 @@
 > Đề tài bài tập lớn học phần Lập trình Python – Nhóm sinh viên lớp 242_INFO4511_02  
 > 🚀 Giao diện: Web app với **Streamlit**  
 > 📁 Lưu trữ dữ liệu: **File JSON**  
-> 💻 Ngôn ngữ: Python (Không dùng class – phù hợp với sinh viên năm 2)
+> 💻 Ngôn ngữ: Python 
 
 ---
 
