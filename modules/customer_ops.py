@@ -1,11 +1,16 @@
 from modules.file_io import read_customers, write_customers
 
+def generate_next_id(data):
+    if not data:
+        return "001"
+    max_id = max(int(c["id"]) for c in data if c["id"].isdigit())
+    return str(max_id + 1).zfill(3)
+
 def add_customer(file_path, customer):
     data = read_customers(file_path)
-    if any(c["id"] == customer["id"] for c in data):
-        return False, f"Mã khách hàng '{customer['id']}' đã tồn tại."
+    customer["id"] = generate_next_id(data)  
 
-    required_fields = ["id", "name", "phone"]
+    required_fields = ["name", "phone"]
     missing = [f for f in required_fields if not customer.get(f)]
     if missing:
         return False, f"Thiếu thông tin: {', '.join(missing)}"
