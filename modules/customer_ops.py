@@ -1,36 +1,39 @@
 from modules.file_io import read_customers, write_customers
-from datetime import datetime
 
-def update_customer(file_path, customer_id, new_data):
+def add_customer(file_path, customer):
     data = read_customers(file_path)
-    updated = False
+    if any(c["id"] == customer["id"] for c in data):
+        return False, f"Mã khách hàng '{customer['id']}' đã tồn tại."
 
-    for customer in data:
-        if customer["id"] == customer_id:
-            for key, value in new_data.items():
-                if value != "" and key in customer:
-                    customer[key] = value
-            customer["last_updated"] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-            updated = True
-            break
+    required_fields = ["id", "name", "phone"]
+    missing = [f for f in required_fields if not customer.get(f)]
+    if missing:
+        return False, f"Thiếu thông tin: {', '.join(missing)}"
 
-    if updated:
-        write_customers(file_path, data)
-        print(f"✅ Đã cập nhật khách hàng ID {customer_id}")
-    else:
-        print(f"⚠️ Không tìm thấy khách hàng ID {customer_id}")
-        
+    data.append(customer)
+    write_customers(file_path, data)
+    return True, f"Đã thêm khách hàng '{customer['id']}' thành công."
+
 def delete_customer(file_path, customer_id):
     data = read_customers(file_path)
-    data = [c for c in data if c["id"] != customer_id]
-    write_customers(file_path, data)
+    if not any(c["id"] == customer_id for c in data):
+        return False, f"Không tìm thấy khách hàng có mã '{customer_id}'."
+
+    new_data = [c for c in data if c["id"] != customer_id]
+    write_customers(file_path, new_data)
+    return True, f"Đã xoá khách hàng '{customer_id}'."
 
 def update_customer(file_path, customer_id, new_data):
     data = read_customers(file_path)
-    for customer in data:
-        if customer["id"] == customer_id:
-            customer.update({k: v for k, v in new_data.items() if v != ""})
-    write_customers(file_path, data)
+    for c in data:
+        if c["id"] == customer_id:
+            updates = {k: v for k, v in new_data.items() if v}
+            if not updates:
+                return False, "Không có dữ liệu mới để cập nhật."
+            c.update(updates)
+            write_customers(file_path, data)
+            return True, f"Đã cập nhật khách hàng '{customer_id}'."
+    return False, f"Không tìm thấy khách hàng có mã '{customer_id}'."
 
 def search_customers(file_path, keyword):
     data = read_customers(file_path)
