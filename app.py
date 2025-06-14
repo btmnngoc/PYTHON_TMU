@@ -76,7 +76,10 @@ elif menu == "Cập nhật":
                 "email": email,
                 "address": address
             })
-            st.success(msg) if success else st.error(msg)
+            if success:
+                st.success(msg)
+            else:
+                st.error(msg)
     else:
         st.info("Không có khách hàng.")
 
